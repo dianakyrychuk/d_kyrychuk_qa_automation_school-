@@ -1,13 +1,13 @@
 package Lsson3;
 
 public class CurrencyConverter {
-    final private double commission;
-    final private double exchangeRate;
 
     public CurrencyConverter(double commission, double exchangeRate) {
         this.commission = commission;
         this.exchangeRate = exchangeRate;
     }
+    private double commission;
+    private double exchangeRate;
 
     private double convertUsdToUah(double amount) {
         return amount * exchangeRate;
