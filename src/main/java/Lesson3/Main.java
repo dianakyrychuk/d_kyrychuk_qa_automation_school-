@@ -12,6 +12,6 @@ public class Main {
             CurrencyConverter converter = new CurrencyConverter(0.01, 36.55);
 
             double totalAmount = converter.calculateTotalAmount(amount);
-            System.out.println("Total amount in UAH is " + totalAmount);
+            System.out.println("Total amount in UAH without commission is " + totalAmount);
         }
 }
