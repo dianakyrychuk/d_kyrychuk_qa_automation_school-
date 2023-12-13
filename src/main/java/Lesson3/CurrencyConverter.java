@@ -1,4 +1,4 @@
-package Lsson3;
+package Lesson3;
 
 public class CurrencyConverter {
 
@@ -20,6 +20,6 @@ public class CurrencyConverter {
     public double calculateTotalAmount(double amount) {
         double amountInUah = convertUsdToUah(amount);
         double commissionAmount = calculateCommission(amountInUah);
-        return amountInUah + commissionAmount;
+        return amountInUah - commissionAmount;
     }
 }
