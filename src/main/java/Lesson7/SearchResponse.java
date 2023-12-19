@@ -5,6 +5,7 @@ import java.util.List;
 public class SearchResponse<T> {
     private List<T> data;
     private Pagination pagination;
+
     public List<T> getData() {
         return data;
     }
