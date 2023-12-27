@@ -1,5 +1,7 @@
 package Lesson10;
 
 public class Mail {
-    //test
+    public static void main (){
+        System.out.println("test");
+    }
 }
