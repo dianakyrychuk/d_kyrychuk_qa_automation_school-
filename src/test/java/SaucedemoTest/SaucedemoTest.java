@@ -1,12 +1,11 @@
-package Homework13;
+package SaucedemoTest;
 
 import org.testng.annotations.Test;
 import page.*;
-
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 
-public class Homework13 {
+public class SaucedemoTest {
 
     private final LoginPage loginPage = new LoginPage();
     private final ProductPage productPage = new ProductPage();

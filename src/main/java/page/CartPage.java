@@ -1,4 +1,5 @@
 package page;
+
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -25,4 +26,5 @@ public class CartPage {
     public CartPage clickCheckoutButton() {
         checkoutButton.click();
         return this;
-    }}
+    }
+}
