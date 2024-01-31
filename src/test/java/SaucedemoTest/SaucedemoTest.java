@@ -16,7 +16,7 @@ public class SaucedemoTest {
 
 
     @Test
-    public void validLogin() {
+    public void checkBuying() {
         open(baseUrl);
         loginPage.setLogin("standard_user")
                 .setPassword("secret_sauce")
