@@ -31,8 +31,8 @@ public class SaucedemoTest {
                 .setLastName("Patron")
                 .setZipCode("12345")
                 .clickContinue();
-        checkoutPage.getTaxesPercent()
-                .clickFinish();
+        checkoutPage.calculateAndPrintTaxPercentage();
+        checkoutPage.clickFinish();
         successPage.checkSuccessText();
     }
 }
