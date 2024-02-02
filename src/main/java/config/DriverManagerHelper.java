@@ -5,13 +5,18 @@ import com.browserup.bup.proxy.CaptureType;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.WebDriverRunner;
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.net.NetworkUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.log4testng.Logger;
 
+import java.net.URL;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -70,23 +75,34 @@ public class DriverManagerHelper {
         Configuration.savePageSource = true;
         Configuration.reportsFolder = "test-result/reports";
         Configuration.timeout = 4000;
-        Configuration.browserCapabilities = capabilities(testName);}
+        Configuration.browserCapabilities = capabilities(testName);
+    }
 
 
+    @SneakyThrows
     public static DesiredCapabilities capabilities(String testName) {
         var capabilities = new DesiredCapabilities();
         var options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         capabilities.setCapability("goog:chromeOptions", options);
+        options.setCapability("selenoid:options", new HashMap<String, Object>() {{
+            /* How to add test badge */
+            put("name", "Saucedemo");
 
-        // Selenoid
-        capabilities.setCapability("enableVideo", false);
-        capabilities.setCapability("videoName", testName + ".mp4");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("sessionTimeout", "2m");
-        capabilities.setCapability("timeZone", "Europe/Kiev");
+            put("sessionTimeout", "15m");
+            put("env", new ArrayList<String>() {{
+                add("TZ=UTC");
+            }});
+            put("labels", new HashMap<String, Object>() {{
+                put("manual", "true");
+            }});
+
+            put("enableVideo", false);
+
+            put("vnc", true);
+        }});
+
+        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
         return capabilities;
     }
-
-
 }
