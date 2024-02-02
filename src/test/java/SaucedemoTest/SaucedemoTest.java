@@ -1,11 +1,13 @@
 package SaucedemoTest;
 
+import config.BaseTest;
 import org.testng.annotations.Test;
 import page.*;
+
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SaucedemoTest {
+public class SaucedemoTest extends BaseTest {
 
     private final LoginPage loginPage = new LoginPage();
     private final ProductPage productPage = new ProductPage();
@@ -17,7 +19,7 @@ public class SaucedemoTest {
 
     @Test
     public void checkBuying() {
-        open(baseUrl);
+        open("https://www.saucedemo.com/");
         loginPage.setLogin("standard_user")
                 .setPassword("secret_sauce")
                 .clickLoginButton();
