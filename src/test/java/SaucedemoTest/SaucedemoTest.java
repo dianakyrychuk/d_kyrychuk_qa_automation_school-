@@ -1,13 +1,14 @@
 package SaucedemoTest;
 
-import config.BaseTest;
+import config.Browser;
+import io.qameta.allure.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import page.*;
-
-import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SaucedemoTest extends BaseTest {
+public class SaucedemoTest {
 
     private final LoginPage loginPage = new LoginPage();
     private final ProductPage productPage = new ProductPage();
@@ -16,11 +17,19 @@ public class SaucedemoTest extends BaseTest {
     private final CheckoutPage checkoutPage = new CheckoutPage();
     private final SuccessPage successPage = new SuccessPage();
 
+    @BeforeTest
+    public void setUpBrowser() {
+        Browser.setBrowser();
+    }
 
-    @Test
+    @Test (description = "test that checks valid process of purchase")
+    @Feature("Frontend tests")
+    @Description("Check saucedemo bying")
+    @TmsLink("TMS")
+    @Link("https://www.saucedemo.com/")
     public void checkBuying() {
-        open("https://www.saucedemo.com/");
-        loginPage.setLogin("standard_user")
+        loginPage.openUrl()
+                .setLogin("standard_user")
                 .setPassword("secret_sauce")
                 .clickLoginButton();
         productPage.addSauceLabsOneSize()
@@ -36,5 +45,10 @@ public class SaucedemoTest extends BaseTest {
         checkoutPage.calculateAndPrintTaxPercentage();
         checkoutPage.clickFinish();
         successPage.checkSuccessText();
+    }
+
+    @AfterTest(alwaysRun = true)
+    public void tearDownBrowser() {
+        Browser.closeBrowser();
     }
 }
